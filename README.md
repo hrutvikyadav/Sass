@@ -7,6 +7,7 @@ Provides features that are missing in css
 - Example-
 Using in css files
 
+```css
 // declaring vars
 $main-fonts: Arial, sans-serif;
 $headings-color: green;
@@ -16,6 +17,7 @@ h1 {
   font-family: $main-fonts;
   color: $headings-color;
 }
+```
 
 ## Nesting css rules for better structure
 
@@ -136,6 +138,7 @@ $colors: (color1: blue, color2: red, color3: green);
   .#{$color}-text {color: $color;}
 }
 ```
+
 > $key variable is needed to work correctly
 
 the output looks like
