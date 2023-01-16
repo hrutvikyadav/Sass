@@ -2,7 +2,11 @@
 
 Provides features that are missing in css
 
-## Sass, variables start with a $ followed by the variable name
+___
+
+## Sass
+
+variables start with a $ followed by the variable name
 
 - Example-
 Using in css files
@@ -18,6 +22,8 @@ h1 {
   color: $headings-color;
 }
 ```
+
+___
 
 ## Nesting css rules for better structure
 
@@ -37,6 +43,8 @@ nav {
   }
 }
 ```
+
+____
 
 ## Mixins
 
@@ -65,6 +73,8 @@ div {
 
 > include the _vendor prefixes_[^vp] and a _general style_ inside mixin**
 
+____
+
 ## Conditions
 
 `@if` `@else` `@else if` directives are available for checking conditions
@@ -85,39 +95,43 @@ Example
 }
 ```
 
+____
+
 ## for loop
 
 2 ways to write in Sass
 
 1. start through end - include iteration for last number
 
-```css
-@for $i from 1 through 12 {
-  .col-#{$i} { width: 100%/12 * $i; }
-}
-```
+    ```css
+    @for $i from 1 through 12 {
+      .col-#{$i} { width: 100%/12 * $i; }
+    }
+    ```
 
-the #{} syntax is an example of string interpolation. takes the value of variable and combines with the rest of the text, forming a string
+    the #{} syntax is an example of string interpolation. takes the value of variable and combines with the rest of the text, forming a string
 
-above snippet converted to css will look like
+    above snippet converted to css will look like
 
-```css
-.col-1 {
-  width: 8.33333%;
-}
+    ```css
+    .col-1 {
+      width: 8.33333%;
+    }
 
-.col-2 {
-  width: 16.66667%;
-}
+    .col-2 {
+      width: 16.66667%;
+    }
 
-...
+    ...
 
-.col-12 {
-  width: 100%;
-}
-```
+    .col-12 {
+      width: 100%;
+    }
+    ```
 
 2. start to end - exclude iteration for last number
+
+____
 
 ## each to loop over list or map
 
@@ -156,5 +170,56 @@ the output looks like
   color: green;
 }
 ```
+
+___
+
+## while loop
+
+create css rules untill a condition is met with `@while` directive
+
+```css
+$x: 1;
+@while $x < 13 {
+  .col-#{$x} { width: 100%/12 * $x;}
+  $x: $x + 1;
+}
+```
+
+> __Do not forget the exit condition to avoid infinite loop__
+
+___
+
+## split code into modules for reuse
+
+create __partial file__ with `_` character prefix and `.scss` extension
+> this indicates to sass that
+> 1. this file is a segment of css,
+> 2. not to convert it to css
+
+use `@import` to use the code in __partial file__
+`@import 'mixins'`
+> just use file name without `_` and `.scss`, Sass understands this is a partial
+
+___
+
+## extend styles in one rule and add upon them to create a new rule with less repitition
+
+use `@extend` keyword along with the rule
+
+```css
+.panel{
+  background-color: red;
+  height: 70px;
+  border: 2px solid green;
+}
+
+.big-panel{
+  @extend .panel; // styles from '.panel' rule reused
+  width: 150px;
+  font-size: 2em;
+}
+```
+
+`.big-panel` has properties of `.panel` and more
 
 [^vp]: Newer CSS features take time before they are fully adopted and ready to use in all browsers. As features are added to browsers, CSS rules for new features may need vendor prefixes. Consider box-shadow(feature) shown in above snippet
